@@ -32,13 +32,7 @@ public class DetAutomaton {
 			this.states.add(q);
 	}
 
-	/**
-	 * Add a transition to the automaton.
-	 * 
-	 * @param p     State from which the transition goes.
-	 * @param label Label of the transition.
-	 * @param q     State to which the transition goes.
-	 */
+	// Add a transition to the automaton, starting at p and going to q with label
 	public void addTransition(String p, char label, String q) {
 		Pair<String, Character> pair = new Pair<String, Character>(p, label);
 		if (!this.delta.containsKey(pair)) {
@@ -46,12 +40,7 @@ public class DetAutomaton {
 		}
 	}
 
-	/**
-	 * Check whether a word is accepted by the automaton.
-	 * 
-	 * @param w An input word.
-	 * @return Whether the automaton accepts the input word.
-	 */
+	// Check whether a word w is accepted
 	public boolean accepts(String w) {
 		String state = this.initialState;
 		Pair<String, Character> transition;
@@ -64,11 +53,7 @@ public class DetAutomaton {
 		return false;
 	}
 
-	/**
-	 * Set a state to be final.
-	 * 
-	 * @param q State to add to the set of final states.
-	 */
+	// Set a state to be final
 	public void setFinal(String q) {
 		this.finalStates.add(q);
 	}
@@ -78,29 +63,17 @@ public class DetAutomaton {
 		return this.finalStates;
 	}
 
-	/**
-	 * Set a state to be initial.
-	 * 
-	 * @param q The state to set as initial.
-	 */
+	// Set a state to be initial
 	public void setInitial(String q) {
 		this.initialState = q;
 	}
 
-	/**
-	 * Get the initial state.
-	 * 
-	 * @return The initial state.
-	 */
+	// Get the initial state
 	public String getInitial() {
 		return this.initialState;
 	}
 
-	/**
-	 * Return the set of states.
-	 * 
-	 * @return The set of states.
-	 */
+	// Return all states
 	public Set<String> getStates() {
 		return this.states;
 	}
@@ -110,13 +83,7 @@ public class DetAutomaton {
 		return this.delta;
 	}
 
-	/**
-	 * Get all transitions from a given state.
-	 * 
-	 * @param p The state of which we want the outgoing transitions.
-	 * @return The set of outgoing transitions, where each outgoing transition is a
-	 *         pair (label, destination).
-	 */
+	// Get all transitions from a given state
 	public Set<Pair<Character, String>> getTransitionsFrom(String p) {
 		Set<Pair<Character, String>> transitions = new HashSet<>();
 		for (Pair<String, Character> key : this.delta.keySet()) {
@@ -128,9 +95,7 @@ public class DetAutomaton {
 		return transitions;
 	}
 
-	/**
-	 * Complete the automaton in place, adding a new state only if necessary.
-	 */
+	// Complete the automaton
 	public void complete() {
 		String sink = "sink" + this.sink_id;
 		this.addState(sink);

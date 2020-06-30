@@ -10,12 +10,7 @@ public class NonDetAutomaton {
 	private Set<String> finalStates;
 	private char EPSILON = '\u0395';
 
-	/**
-	 * Create an automaton on a given alphabet. {@link EPSILON} will never be part
-	 * of the input alphabet.
-	 * 
-	 * @param alph The alphabet of the automaton, can be EMPTY_SET.
-	 */
+	// Create an automaton
 	public NonDetAutomaton(Set<Character> alph) {
 		// TODO: Fill this.
 		this.states = new HashSet<>();
@@ -25,28 +20,18 @@ public class NonDetAutomaton {
 		this.finalStates = new HashSet<>();
 	}
 
-	// Alphabet of the automaton.
+	// Return the alphabet of the automaton.
 	public Set<Character> getAlphabet() {
 		return this.alph;
 	}
 
-	/**
-	 * Add a state to the automaton.
-	 * 
-	 * @param q The state to add.
-	 */
+	// Add a state to the automaton
 	public void addState(String q) {
 		if (!this.states.contains(q))
 			this.states.add(q);
 	}
 
-	/**
-	 * Add a transition to the automaton.
-	 * 
-	 * @param p     State from which the transition goes.
-	 * @param label Label of the transition, can be {@link EPSILON}.
-	 * @param q     State to which the transition goes.
-	 */
+	// Add a transition to the automaton, starting at p and going to q with label
 	public void addTransition(String p, char label, String q) {
 		Pair<String, Character> pair = new Pair<String, Character>(p, label);
 		if (!this.delta.containsKey(pair)) {
@@ -88,12 +73,7 @@ public class NonDetAutomaton {
 		return e_transitions;
 	}
 
-	/**
-	 * Check whether a word is accepted by the automaton.
-	 * 
-	 * @param w An input word.
-	 * @return Whether the automaton accepts the input word.
-	 */
+	// Check whether a word w is accepted by the automaton
 	public boolean accepts(String w) {
 		Set<String> currentStates = new HashSet<>();
 		Set<String> initialStates = new HashSet<>();
@@ -120,11 +100,7 @@ public class NonDetAutomaton {
 		return false;
 	}
 
-	/**
-	 * Set a state to be final.
-	 * 
-	 * @param q State to add to the set of final states.
-	 */
+	// Set a state to be final
 	public void setFinal(String q) {
 		this.finalStates.add(q);
 	}
@@ -134,11 +110,7 @@ public class NonDetAutomaton {
 		return this.finalStates;
 	}
 
-	/**
-	 * Set a state to be initial.
-	 * 
-	 * @param q The state to set as initial.
-	 */
+	// Set a state to be initial
 	public void setInitial(String q) {
 		this.initialState = q;
 	}
@@ -152,14 +124,13 @@ public class NonDetAutomaton {
 	public Set<String> getStates() {
 		return this.states;
 	}
+	
+	// Return transitions
+		public Map<Pair<String, Character>, Set<String>> getDelta() {
+			return this.delta;
+		}
 
-	/**
-	 * Get all transitions from a given state.
-	 * 
-	 * @param p The state of which we want the outgoing transitions.
-	 * @return The set of outgoing transitions, where each outgoing transition is a
-	 *         pair (label, destination).
-	 */
+	// Get all transitions from a state
 	public Set<Pair<Character, String>> getTransitionsFrom(String p) {
 		Set<Pair<Character, String>> transitions = new HashSet<>();
 		for (Pair<String, Character> key : this.delta.keySet()) {
@@ -173,11 +144,7 @@ public class NonDetAutomaton {
 		return transitions;
 	}
 
-	/**
-	 * Determinize an automaton.
-	 * 
-	 * @return An equivalent deterministic automaton.
-	 */
+	// Convert a NFA to a DFA (determinize)
 	public DetAutomaton determinize() {
 		// TODO: Fill this.
 		DetAutomaton B = new DetAutomaton(getAlphabet());
