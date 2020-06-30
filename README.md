@@ -10,6 +10,7 @@ This is a tool built using Java that helps with the following tasks:
 2. Checking if a word is accepted by a NFA
 3. Converting a DFA to a NFA
 4. Completing a DFA
+
 The logic behind these algorithms can be found online, or in the book *Introduction to the Theory of Computation*, by Michael Sipser. Note that the algorithms in this repo are based on the explanation given by Sipser.
 
 ## How to run the code
