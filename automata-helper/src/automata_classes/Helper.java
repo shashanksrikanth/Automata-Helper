@@ -74,7 +74,8 @@ public class Helper {
 			System.out.println("Enter word: ");
 			String word = scan.nextLine();
 			boolean accept = dfa.accepts(word);
-			System.out.println(accept);
+			if(accept) System.out.println("Word is accepted.");
+			else System.out.println("Word is not accepted.");
 		}
 		scan.close();
 	}
